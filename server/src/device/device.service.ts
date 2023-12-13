@@ -120,7 +120,8 @@ export class DeviceService {
     // console.log({ ...device.control._doc, ...data });
     // await device.save();
     await this.deviceModel.findByIdAndUpdate(id, { control: data });
-    // LEDPin.writeSync(buttonState); //turn LED on or off
+
+    // LEDPin.writeSync(data == 'ON' ? 1 : 0); //turn LED on or off
 
     // this.mqttService.publish(
     //   process.env.MQTT_TOPIC_CONTROL,

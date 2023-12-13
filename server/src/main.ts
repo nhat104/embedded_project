@@ -13,6 +13,7 @@ async function bootstrap() {
       url: 'mqtt://broker.hivemq.com:1883',
     },
   });
+
   const config = new DocumentBuilder()
     .setTitle('IOT Api')
     .setDescription('IOT API description')

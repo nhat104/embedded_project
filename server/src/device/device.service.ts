@@ -16,6 +16,17 @@ import { TypeNotification } from 'src/notification/enum/type-notification.enum';
 // var Gpio = require('onoff').Gpio; //require onoff to control GPIO
 // var LEDPin = new Gpio(4, 'out'); //declare GPIO4 an output
 
+const devices = [
+  {
+    id: '63bb48c053ed6bd2b528c623',
+    pin: 1,
+  },
+  {
+    id: '63d4f6d46651091cd3fcf132',
+    pin: 2,
+  },
+];
+
 @Injectable()
 export class DeviceService {
   constructor(

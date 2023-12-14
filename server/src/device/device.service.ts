@@ -13,8 +13,8 @@ import { forwardRef } from '@nestjs/common/utils';
 import { SocketService } from 'src/socket/socket.service';
 import { NotificationService } from 'src/notification/notification.service';
 import { TypeNotification } from 'src/notification/enum/type-notification.enum';
-// var Gpio = require('onoff').Gpio; //require onoff to control GPIO
-// var LEDPin = new Gpio(4, 'out'); //declare GPIO4 an output
+// import { Gpio } from 'onoff';
+// const LEDPin = new Gpio(23, 'out');
 
 const devices = [
   {
@@ -121,7 +121,7 @@ export class DeviceService {
     // await device.save();
     await this.deviceModel.findByIdAndUpdate(id, { control: data });
 
-    // LEDPin.writeSync(data == 'ON' ? 1 : 0); //turn LED on or off
+    // LEDPin.writeSync(data.status == 'ON' ? 1 : 0); //turn LED on or off
 
     // this.mqttService.publish(
     //   process.env.MQTT_TOPIC_CONTROL,

@@ -2,7 +2,6 @@ import { BadRequestException, Injectable, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ConfirmResponse } from 'src/common/classes/confirm-response.class';
-import { MqttService } from 'src/mqtt/mqtt.service';
 import { RoomService } from 'src/room/room.service';
 import { ControlDeviceDto } from './dto/control-device.dto';
 import { CreateDeviceTypeDto } from './dto/create-device-type.dto';
@@ -38,7 +37,6 @@ export class DeviceService {
     private roomService: RoomService,
     @Inject(forwardRef(() => NotificationService))
     private notificationService: NotificationService,
-    private mqttService: MqttService,
     private socketService: SocketService,
   ) {}
   async createDevice(data: CreateDeviceDto) {

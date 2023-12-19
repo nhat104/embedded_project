@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Col, Form, Input, Modal, Row, Select, message } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { Devices } from '../config/devices';
-import { Col, Form, Input, message, Modal, Row, Select } from 'antd';
 import '../scss/devices.scss';
 import { addDevice, controlDevice, deleteDevice, getAllDeviceType } from '../service/device';
 
@@ -13,7 +13,6 @@ const Device = ({
   setReload,
   reload,
   role,
-  socket,
 }) => {
   const [form] = Form.useForm();
   const [deviceList, setDeviceList] = useState([]);
@@ -32,14 +31,7 @@ const Device = ({
       }
     });
   }, []);
-  useEffect(() => {
-    if (socket) {
-      socket.on('control', (res) => {
-        console.log(res);
-        setReload(!reload);
-      });
-    }
-  }, [socket]);
+
   const handleToggleOnOff = (device) => {
     controlDevice(device._id, { status: device.control.status === 'ON' ? 'OFF' : 'ON' }, (res) => {
       setReload(!reload);
@@ -154,8 +146,8 @@ const Device = ({
             <Form.Item label='Device type' name={'type'}>
               <Select placeholder={'Choose device type'} options={deviceList} />
             </Form.Item>
-            <Form.Item label='Device ID' name={'_id'}>
-              <Input placeholder='Device ID' />
+            <Form.Item label='Pin Number' name={'pin'}>
+              <Input placeholder='Pin Number' />
             </Form.Item>
             <Form.Item label='Device name' name={'name'}>
               <Input placeholder='Device name' />

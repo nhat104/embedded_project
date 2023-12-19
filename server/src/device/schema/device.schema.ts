@@ -4,11 +4,11 @@ import { Room } from 'src/room/schema/room.schema';
 
 @Schema({ timestamps: true })
 export class Device {
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId })
-  _id: string;
-
   @Prop({ required: true })
   name: string;
+
+  @Prop({ required: true })
+  pin: number;
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,

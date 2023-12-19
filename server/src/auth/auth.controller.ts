@@ -8,21 +8,19 @@ import { LocalAuthGuard } from './guards/local.guard';
 
 @Controller('api')
 export class AuthController {
-    constructor(
-        private authService: AuthService
-    ) { }
-    @Post('register')
-    @ApiBody({ type: RegisterDto })
-    @ApiTags('[AUTH] Register')
-    async register(@Body() user): Promise<ConfirmResponse> {
-        return await this.authService.register(user);
-    }
+  constructor(private authService: AuthService) {}
+  @Post('register')
+  @ApiBody({ type: RegisterDto })
+  @ApiTags('[AUTH] Register')
+  async register(@Body() user): Promise<ConfirmResponse> {
+    return await this.authService.register(user);
+  }
 
-    @UseGuards(LocalAuthGuard)
-    @Post('login')
-    @ApiBody({ type: LoginDto })
-    @ApiTags('[AUTH] Login')
-    async login(@Req() req): Promise<ConfirmResponse> {
-        return await this.authService.login(req.user);
-    }
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  @ApiBody({ type: LoginDto })
+  @ApiTags('[AUTH] Login')
+  async login(@Req() req): Promise<ConfirmResponse> {
+    return await this.authService.login(req.user);
+  }
 }

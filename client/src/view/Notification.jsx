@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
-import "../scss/notification.scss";
-import { notifications, notiType, requests } from "../config/notifications";
-import { Menu, message, Tag } from "antd";
+import { Menu, Tag, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { notiType } from '../config/notifications';
+import '../scss/notification.scss';
 import {
   getAllNotifications,
   getAllRequest,
   readNoti,
   responseRequest,
-} from "../service/notification";
+} from '../service/notification';
 
 const Notification = () => {
   const items = [
     {
-      label: "Notification",
-      key: "notification",
+      label: 'Notification',
+      key: 'notification',
     },
     {
-      label: "Request",
-      key: "request",
+      label: 'Request',
+      key: 'request',
     },
   ];
 
-  const [current, setCurrent] = useState("notification");
-  const [isLoad, setIsLoad] = useState(true);
+  const [current, setCurrent] = useState('notification');
   const [notiList, setNotiList] = useState([]);
   const [requestList, setRequestList] = useState([]);
+
   useEffect(() => {
-    if (current === "notification") {
+    if (current === 'notification') {
       getAllNotifications((res) => {
         if (res.data.success === true) {
           setNotiList(res.data.notifications);
@@ -43,7 +43,8 @@ const Notification = () => {
         }
       });
     }
-  }, [current, isLoad]);
+  }, [current]);
+
   const onClick = (e) => {
     setCurrent(e.key);
   };
@@ -51,7 +52,7 @@ const Notification = () => {
   const handleResponseRequest = (id, data) => {
     responseRequest(id, data, (res) => {
       if (res.data.success === true) {
-        message("Send response successfully !");
+        message('Send response successfully !');
       } else {
         message.error(res.data.message);
       }
@@ -61,7 +62,7 @@ const Notification = () => {
   const handleReadNoti = (id) => {
     readNoti(id, (res) => {
       if (res.data.success === true) {
-        message.success("Mark the notification as read !");
+        message.success('Mark the notification as read !');
       } else {
         message.error(res.data.message);
       }
@@ -69,52 +70,47 @@ const Notification = () => {
   };
 
   return (
-    <div className="notifications">
-      <div className="container">
-        <div className="menu">
-          <Menu
-            onClick={onClick}
-            selectedKeys={[current]}
-            mode="horizontal"
-            items={items}
-          />
+    <div className='notifications'>
+      <div className='container'>
+        <div className='menu'>
+          <Menu onClick={onClick} selectedKeys={[current]} mode='horizontal' items={items} />
         </div>
 
-        {current === "notification" &&
+        {current === 'notification' &&
           notiList.length !== 0 &&
           notiList.map((noti, index) => {
             return (
               <div
-                className="noti"
+                className='noti'
                 key={index}
                 style={{
-                  background: `${noti.isRead ? "transparent" : "white"}`,
-                  color: `${noti.isRead ? "white" : "var(--blue)"}`,
+                  background: `${noti.isRead ? 'transparent' : 'white'}`,
+                  color: `${noti.isRead ? 'white' : 'var(--blue)'}`,
                 }}
               >
                 <span
-                  className="type"
+                  className='type'
                   style={{
                     background: `${
                       noti.type === notiType.WARNING
-                        ? "red"
+                        ? 'red'
                         : noti.type === notiType.INFO
-                        ? "var(--green)"
-                        : "green"
+                        ? 'var(--green)'
+                        : 'green'
                     }`,
                   }}
                 >
-                  {noti.type}{" "}
+                  {noti.type}{' '}
                 </span>
                 {noti.content}
                 <p></p>
                 {!noti.isRead && (
-                  <div className="button">
+                  <div className='button'>
                     <button
                       onClick={() => handleReadNoti(noti._id)}
                       style={{
-                        border: "1px solid var(--blue)",
-                        color: "var(--blue)",
+                        border: '1px solid var(--blue)',
+                        color: 'var(--blue)',
                       }}
                     >
                       Read
@@ -125,61 +121,56 @@ const Notification = () => {
             );
           })}
 
-        {current === "request" &&
+        {current === 'request' &&
           requestList.length !== 0 &&
           requestList.map((noti, index) => {
             return (
               <div
-                className="noti"
+                className='noti'
                 key={index}
                 style={{
-                  background: `${noti.isRead ? "transparent" : "white"}`,
-                  color: `${noti.isRead ? "white" : "var(--blue)"}`,
+                  background: `${noti.isRead ? 'transparent' : 'white'}`,
+                  color: `${noti.isRead ? 'white' : 'var(--blue)'}`,
                 }}
               >
                 <p>
-                  {noti.from.name} invited you to become a member of{" "}
-                  {noti.home.name}{" "}
+                  {noti.from.name} invited you to become a member of {noti.home.name}{' '}
                   <Tag
                     color={
-                      noti.status === "Pending"
-                        ? "var(--yellow)"
-                        : noti.status === "Accepted"
-                        ? "#1677ff"
-                        : "var(--pink)"
+                      noti.status === 'Pending'
+                        ? 'var(--yellow)'
+                        : noti.status === 'Accepted'
+                        ? '#1677ff'
+                        : 'var(--pink)'
                     }
                   >
                     {noti.status}
                   </Tag>
                 </p>
-                {noti.status === "Pending" && (
-                  <div className="action">
+                {noti.status === 'Pending' && (
+                  <div className='action'>
                     <div
-                      className="button"
+                      className='button'
                       onClick={() => {
-                        handleResponseRequest(noti._id, { status: "Rejected" });
+                        handleResponseRequest(noti._id, { status: 'Rejected' });
                       }}
                     >
                       <button
                         style={{
-                          border: "1px solid var(--blue)",
-                          color: "var(--blue)",
+                          border: '1px solid var(--blue)',
+                          color: 'var(--blue)',
                         }}
                       >
                         Reject
                       </button>
                     </div>
                     <div
-                      className="button"
+                      className='button'
                       onClick={() => {
-                        handleResponseRequest(noti._id, { status: "Accepted" });
+                        handleResponseRequest(noti._id, { status: 'Accepted' });
                       }}
                     >
-                      <button
-                        style={{ background: "var(--pink)", border: "none" }}
-                      >
-                        Accept
-                      </button>
+                      <button style={{ background: 'var(--pink)', border: 'none' }}>Accept</button>
                     </div>
                   </div>
                 )}

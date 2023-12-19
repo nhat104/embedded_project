@@ -9,7 +9,6 @@ import { UserModule } from './user/user.module';
 import { HomeModule } from './home/home.module';
 import { RoomModule } from './room/room.module';
 import { DeviceModule } from './device/device.module';
-import { MqttModule } from './mqtt/mqtt.module';
 import { join } from 'path';
 import { NotificationModule } from './notification/notification.module';
 import { RequestMemberModule } from './request-member/request-member.module';
@@ -29,7 +28,6 @@ import { CronJobModule } from './cron-job/cron-job.module';
     HomeModule,
     RoomModule,
     DeviceModule,
-    MqttModule,
     NotificationModule,
     RequestMemberModule,
     ScheduleModule,
@@ -38,4 +36,4 @@ import { CronJobModule } from './cron-job/cron-job.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

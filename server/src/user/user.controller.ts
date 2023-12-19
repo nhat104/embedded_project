@@ -1,7 +1,18 @@
-import { Controller, Post, Body, Patch, Req, UseGuards, UseInterceptors, BadRequestException, UploadedFile, Get } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { diskStorage } from 'multer';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
@@ -10,7 +21,7 @@ import { UserService } from './user.service';
 @ApiBearerAuth()
 @Controller('api/users')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @Patch('profile')
   @ApiBody({ type: UpdateUserDto })
@@ -28,7 +39,9 @@ export class UserController {
           cb(null, true);
         } else {
           cb(
-            new BadRequestException('File is not supported, only upload png, jpg, jpeg file'),
+            new BadRequestException(
+              'File is not supported, only upload png, jpg, jpeg file',
+            ),
             false,
           );
         }

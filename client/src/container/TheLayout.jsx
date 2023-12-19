@@ -8,12 +8,9 @@ import { getAllRoomType } from '../redux/action/roomType';
 import routes from '../routes';
 import '../scss/layout.scss';
 import { getAllowedNav, getAllowedRoute } from '../service/auth';
-import { getUserInfo } from '../service/user';
 import TheContent from './TheContent';
 import TheHeader from './TheHeader';
 import TheNavbar from './TheNavbar';
-
-import io from 'socket.io-client';
 
 const TheLayout = () => {
   const role = 'OWNER';
@@ -21,27 +18,6 @@ const TheLayout = () => {
   let allowedNav, allowedRoute;
   const [socket, setSocket] = useState(null);
   const user = useSelector((state) => state.auth.data);
-
-  useEffect(() => {
-    !socket && setSocket(io('http://localhost:4000'));
-  }, [socket]);
-
-  useEffect(() => {
-    if (socket) socket.emit('join', user.id);
-  }, [socket, user]);
-
-  useEffect(() => {
-    if (socket) {
-      socket.on('request', (res) => {
-        console.log(res);
-        message.info(res.message);
-      });
-      socket.on('notification', (res) => {
-        console.log(res);
-        message.info(res.content);
-      });
-    }
-  }, [socket]);
 
   if (user) {
     allowedRoute = getAllowedRoute(routes, role);

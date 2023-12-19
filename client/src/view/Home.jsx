@@ -12,7 +12,7 @@ import { getRoomDetail } from '../service/room';
 import { createRoomType, getAllRoomTypes } from '../service/roomType';
 import { useSelector } from 'react-redux';
 
-const Home = ({ socket }) => {
+const Home = () => {
   const [houses, setHouses] = useState([]);
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const Home = ({ socket }) => {
         if (res.data.success === true) {
           const rooms = [];
           let roomNum = 0;
-          res.data.home.roomTypes.map((room) => {
+          res.data.home.roomTypes.forEach((room) => {
             roomNum += room.rooms.length;
             rooms.push(room);
           });
@@ -223,7 +223,6 @@ const Home = ({ socket }) => {
           <div className='devices'>
             {showDevice !== -1 ? (
               <Device
-                socket={socket}
                 role={house.isHost}
                 reload={reload}
                 setReload={setReload}

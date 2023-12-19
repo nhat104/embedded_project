@@ -21,10 +21,11 @@ export const createHouse = (data, callback) => {
   axios
     .post(api, data)
     .then((res) => {
+      console.log(res.data.data);
       callback(res.data);
     })
     .catch((err) => {
-      callback(err.response.data);
+      callback(err.response);
     });
 };
 

@@ -4,10 +4,6 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateDeviceDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  _id: string;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
   name: string;
 
   @ApiProperty({ required: true })
@@ -17,4 +13,8 @@ export class CreateDeviceDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   room: string;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  pin: number;
 }

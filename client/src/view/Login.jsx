@@ -15,9 +15,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
   const [form] = Form.useForm();
+
   const onFinish = (values) => {
     dispatch(userLogin(values));
   };
+
   useEffect(() => {
     if (user.status === false) user.message !== '' && message.error(user.message);
     else user.message !== '' && message.success(user.message);
@@ -26,6 +28,7 @@ const Login = () => {
       navigate(pathname.home);
     }
   }, [user]);
+
   return (
     <div className='login'>
       <div className='logo'>

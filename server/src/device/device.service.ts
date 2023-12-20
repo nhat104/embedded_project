@@ -13,18 +13,6 @@ import { SocketService } from 'src/socket/socket.service';
 import { NotificationService } from 'src/notification/notification.service';
 import { TypeNotification } from 'src/notification/enum/type-notification.enum';
 // import { Gpio } from 'onoff';
-// const LEDPin = new Gpio(23, 'out');
-
-const devices = [
-  {
-    id: '63bb48c053ed6bd2b528c623',
-    pin: 1,
-  },
-  {
-    id: '63d4f6d46651091cd3fcf132',
-    pin: 2,
-  },
-];
 
 @Injectable()
 export class DeviceService {
@@ -119,6 +107,7 @@ export class DeviceService {
     // await device.save();
     await this.deviceModel.findByIdAndUpdate(id, { control: data });
 
+    // const LEDPin = new Gpio(device.pin, 'out');
     // LEDPin.writeSync(data.status == 'ON' ? 1 : 0); //turn LED on or off
 
     // this.mqttService.publish(

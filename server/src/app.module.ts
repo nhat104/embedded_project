@@ -14,6 +14,7 @@ import { NotificationModule } from './notification/notification.module';
 import { RequestMemberModule } from './request-member/request-member.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CronJobModule } from './cron-job/cron-job.module';
+import { MqttModule } from './mqtt/mqtt.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -28,6 +29,7 @@ import { CronJobModule } from './cron-job/cron-job.module';
     HomeModule,
     RoomModule,
     DeviceModule,
+    MqttModule,
     NotificationModule,
     RequestMemberModule,
     ScheduleModule,

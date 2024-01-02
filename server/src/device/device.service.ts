@@ -12,7 +12,8 @@ import { forwardRef } from '@nestjs/common/utils';
 import { SocketService } from 'src/socket/socket.service';
 import { NotificationService } from 'src/notification/notification.service';
 import { TypeNotification } from 'src/notification/enum/type-notification.enum';
-import { Gpio } from 'onoff';
+import { MqttService } from 'src/mqtt/mqtt.service';
+// import { Gpio } from 'onoff';
 
 @Injectable()
 export class DeviceService {
@@ -25,6 +26,7 @@ export class DeviceService {
     private roomService: RoomService,
     @Inject(forwardRef(() => NotificationService))
     private notificationService: NotificationService,
+    private mqttService: MqttService,
     private socketService: SocketService,
   ) {}
   async createDevice(data: CreateDeviceDto) {
@@ -107,8 +109,12 @@ export class DeviceService {
     // await device.save();
     await this.deviceModel.findByIdAndUpdate(id, { control: data });
 
-    const LEDPin = new Gpio(device.pin, 'out');
-    LEDPin.writeSync(data.status == 'ON' ? 1 : 0); //turn LED on or off
+    // const LEDPin = new Gpio(device.pin, 'out');
+    // LEDPin.writeSync(data.status == 'ON' ? 1 : 0); //turn LED on or off
+    this.mqttService.publish(
+      process.env.MQTT_TOPIC_CONTROL,
+      JSON.stringify({ control: data, deviceId: id }),
+    );
 
     return new ConfirmResponse({
       data: {

@@ -8,9 +8,11 @@ import { RoomModule } from 'src/room/room.module';
 import { forwardRef } from '@nestjs/common/utils';
 import { SocketService } from 'src/socket/socket.service';
 import { NotificationModule } from 'src/notification/notification.module';
+import { MqttModule } from 'src/mqtt/mqtt.module';
 
 @Module({
   imports: [
+    MqttModule,
     forwardRef(() => RoomModule),
     forwardRef(() => NotificationModule),
     MongooseModule.forFeature([

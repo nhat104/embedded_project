@@ -1,19 +1,19 @@
-import pathname from "./config/pathname";
+import pathname from './config/pathname';
 const nav = [
   {
-    label: "home",
+    label: 'home',
     to: `${pathname.home}`,
-    color: "var(--purple)",
+    color: 'var(--purple)',
   },
   {
-    label: "add",
+    label: 'add',
     to: pathname.createHouse,
-    color: "var(--yellow)",
+    color: 'var(--yellow)',
   },
   {
-    label: "person",
+    label: 'person',
     to: pathname.profile,
-    color: "var(--black)",
+    color: 'var(--secondary)',
   },
 ];
 

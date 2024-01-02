@@ -34,7 +34,7 @@ const TheLayout = () => {
       <Layout>
         <TheHeader />
         <TheContent menu={allowedRoute} socket={socket} />
-        <TheNavbar menu={allowedNav} />
+        {/* <TheNavbar menu={allowedNav} /> */}
       </Layout>
     </Layout>
   );

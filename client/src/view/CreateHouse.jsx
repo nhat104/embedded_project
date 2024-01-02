@@ -190,7 +190,7 @@ const CreateHouse = () => {
                   width: '100px',
                   height: '30px',
                   borderRadius: '5px',
-                  background: 'var(--black)',
+                  background: 'var(--purple)',
                   border: 'none',
                   color: 'var(--white)',
                 }}

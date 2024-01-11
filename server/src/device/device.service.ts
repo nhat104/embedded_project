@@ -72,6 +72,11 @@ export class DeviceService {
     });
   }
 
+  async getDevicesInRoom(room) {
+    const devices = await this.deviceModel.find({ room }).select('pin control');
+    return devices;
+  }
+
   async getAllDeviceTypes() {
     const deviceTypes = await this.deviceTypeModel.find().select('name');
     return new ConfirmResponse({
@@ -111,9 +116,10 @@ export class DeviceService {
 
     // const LEDPin = new Gpio(device.pin, 'out');
     // LEDPin.writeSync(data.status == 'ON' ? 1 : 0); //turn LED on or off
+
     this.mqttService.publish(
       process.env.MQTT_TOPIC_CONTROL,
-      JSON.stringify({ control: data, deviceId: id }),
+      JSON.stringify({ status: data.status, pin: device.pin }),
     );
 
     return new ConfirmResponse({

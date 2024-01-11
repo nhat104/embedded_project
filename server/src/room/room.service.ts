@@ -16,6 +16,7 @@ import { CreateRoomDto } from './dto/create-room.dto';
 import { RoomDocument } from './schema/room.schema';
 import { RoomTypeDocument } from './schema/room-type.schema';
 import { DeviceService } from 'src/device/device.service';
+import { MqttService } from 'src/mqtt/mqtt.service';
 
 @Injectable()
 export class RoomService {
@@ -28,6 +29,7 @@ export class RoomService {
     private homeService: HomeService,
     @Inject(forwardRef(() => DeviceService))
     private deviceService: DeviceService,
+    private mqttService: MqttService,
   ) {}
 
   async getAllRoomTypes() {
@@ -140,6 +142,10 @@ export class RoomService {
     if (!room) {
       throw new NotFoundException('Room not existed');
     }
+
+    // const devices = await this.deviceService.getDevicesInRoom(roomId);
+    // this.mqttService.subscribe('nhatmm/get-device-status');
+
     return new ConfirmResponse({
       data: {
         success: true,
